@@ -26,6 +26,8 @@ import { statelessSessions } from '@keystone-6/core/session';
 let sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret && process.env.NODE_ENV !== 'production') {
   sessionSecret = randomBytes(32).toString('hex');
+} else {
+  sessionSecret = randomBytes(32).toString('hex');
 }
 
 // withAuth is a function we can use to wrap our base configuration
