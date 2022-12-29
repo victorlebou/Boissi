@@ -1,6 +1,6 @@
 import { list } from "@keystone-6/core";
 import { allowAll } from "@keystone-6/core/access";
-import { password, relationship, select, text, timestamp} from "@keystone-6/core/fields";
+import { decimal, float, password, relationship, select, text, timestamp} from "@keystone-6/core/fields";
 import { bloodAlcohol } from "./blood-alcohol-concentration";
 import { contributionVf } from "./user-contribution-virtual-field";
 
@@ -32,5 +32,6 @@ export const user = list({
     }),
       contribution: contributionVf,
       bloodAlcohol: bloodAlcohol,
+      bloodAlcoholHistory: float({ validation: { isRequired: false } }),
     }}
 );

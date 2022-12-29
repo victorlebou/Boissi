@@ -34,6 +34,13 @@ export const bloodAlcohol = virtual({
                 bloodAlcohol += (size * alcoolPercentage * 0.01 * 0.8) / (70 * 0.6 * 10);
             }
         }
+        const updatedResult = await context.query.User.updateOne({
+            where: {id: user.id},
+            data: {
+                bloodAlcoholHistory: parseFloat(bloodAlcohol.toFixed(3))
+            },
+            query: 'id'
+        })
 
         return parseFloat(bloodAlcohol.toFixed(3));
       }

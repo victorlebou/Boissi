@@ -12,6 +12,7 @@ type User {
   drinksCount(where: DrinkWhereInput! = {}): Int
   contribution: Int
   bloodAlcohol: Float
+  bloodAlcoholHistory: Float
 }
 
 enum UserSexType {
@@ -40,6 +41,7 @@ input UserWhereInput {
   email: StringFilter
   createdAt: DateTimeNullableFilter
   drinks: DrinkManyRelationFilter
+  bloodAlcoholHistory: FloatNullableFilter
 }
 
 input IDFilter {
@@ -105,12 +107,24 @@ input DrinkManyRelationFilter {
   none: DrinkWhereInput
 }
 
+input FloatNullableFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: FloatNullableFilter
+}
+
 input UserOrderByInput {
   id: OrderDirection
   name: OrderDirection
   sex: OrderDirection
   email: OrderDirection
   createdAt: OrderDirection
+  bloodAlcoholHistory: OrderDirection
 }
 
 enum OrderDirection {
@@ -125,6 +139,7 @@ input UserUpdateInput {
   password: String
   createdAt: DateTime
   drinks: DrinkRelateToManyForUpdateInput
+  bloodAlcoholHistory: Float
 }
 
 input DrinkRelateToManyForUpdateInput {
@@ -146,6 +161,7 @@ input UserCreateInput {
   password: String
   createdAt: DateTime
   drinks: DrinkRelateToManyForCreateInput
+  bloodAlcoholHistory: Float
 }
 
 input DrinkRelateToManyForCreateInput {

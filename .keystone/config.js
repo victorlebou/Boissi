@@ -58,6 +58,13 @@ var bloodAlcohol = (0, import_fields.virtual)({
           bloodAlcohol2 += size * alcoolPercentage * 0.01 * 0.8 / (70 * 0.6 * 10);
         }
       }
+      const updatedResult = await context.query.User.updateOne({
+        where: { id: user2.id },
+        data: {
+          bloodAlcoholHistory: parseFloat(bloodAlcohol2.toFixed(3))
+        },
+        query: "id"
+      });
       return parseFloat(bloodAlcohol2.toFixed(3));
     }
   })
@@ -110,7 +117,8 @@ var user = (0, import_core3.list)(
         many: true
       }),
       contribution: contributionVf,
-      bloodAlcohol
+      bloodAlcohol,
+      bloodAlcoholHistory: (0, import_fields3.float)({ validation: { isRequired: false } })
     }
   }
 );

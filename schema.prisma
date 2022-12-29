@@ -13,13 +13,14 @@ generator client {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  name      String    @default("")
-  sex       String    @map("sex")
-  email     String    @unique @default("")
-  password  String
-  createdAt DateTime? @default(now())
-  drinks    Drink[]   @relation("Drink_user")
+  id                  String    @id @default(cuid())
+  name                String    @default("")
+  sex                 String    @map("sex")
+  email               String    @unique @default("")
+  password            String
+  createdAt           DateTime? @default(now())
+  drinks              Drink[]   @relation("Drink_user")
+  bloodAlcoholHistory Float?
 }
 
 model Drink {
