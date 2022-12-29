@@ -43,6 +43,7 @@ var bloodAlcohol = (0, import_fields.virtual)({
         query: "id size alcoholPercentage"
       });
       let bloodAlcohol2 = 0;
+      let timeOfFirstDrink;
       if (user2.sex == "male") {
         for (let drink2 of userDrinks) {
           const drinkItem = drink2;
@@ -83,7 +84,7 @@ var contributionVf = (0, import_fields2.virtual)({
       });
       const userDrinksCount = userDrinks.length;
       const totalDrinks = await context.query.Drink.count({});
-      return Math.round(userDrinksCount / totalDrinks * 100);
+      return Math.round(userDrinksCount / totalDrinks * 100) / 100;
     }
   })
 });

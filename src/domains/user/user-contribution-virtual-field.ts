@@ -13,7 +13,7 @@ export const contributionVf = virtual({
         const userDrinksCount = userDrinks.length;
         const totalDrinks = await context.query.Drink.count({});
 
-        return  Math.round(userDrinksCount / totalDrinks * 100);
+        return  Math.round(userDrinksCount / totalDrinks * 100) / 100;
       }
     })
 });

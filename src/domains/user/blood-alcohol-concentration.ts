@@ -14,6 +14,7 @@ export const bloodAlcohol = virtual({
         })
 
         let bloodAlcohol = 0
+        let timeOfFirstDrink;
         if (user.sex == 'male'){
             for(let drink of userDrinks){
                 const drinkItem = drink as DrinkItem;
@@ -23,6 +24,10 @@ export const bloodAlcohol = virtual({
           
                 bloodAlcohol += (size * alcoholPercentage * 0.01 * 0.8) / (80 * 0.7 * 10);
             }
+            //const drinkItem = userDrinks.get(0) as DrinkItem;
+            //const timestart = drinkItem.createdAt
+            //const timeElapsed = Date.now() - +(timestart)
+            //bloodAlcohol -= timeElapsed * 0.015
         }
         else {
             for(let drink of userDrinks){
