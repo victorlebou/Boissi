@@ -10,9 +10,7 @@ export const contributionVf = virtual({
         const userDrinks = await context.query.Drink.findMany({
             where: {user: {id: {equals: user.id}}}
         });
-        console.log(userDrinks);
         const userDrinksCount = userDrinks.length;
-        console.log(userDrinksCount);
         const totalDrinks = await context.query.Drink.count({});
 
         return  Math.round(userDrinksCount / totalDrinks * 100);

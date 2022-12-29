@@ -1,12 +1,23 @@
 import { list } from "@keystone-6/core";
 import { allowAll } from "@keystone-6/core/access";
-import { password, relationship, text, timestamp} from "@keystone-6/core/fields";
+import { password, relationship, select, text, timestamp} from "@keystone-6/core/fields";
+import { bloodAlcohol } from "./blood-alcohol-concentration";
 import { contributionVf } from "./user-contribution-virtual-field";
 
 export const user = list({
     access: allowAll,
     fields: {
       name: text({ validation: { isRequired: true } }),
+      sex: select({
+        type: 'enum',
+        options: [
+          { label: 'Male', value: 'male' },
+          { label: 'Female', value: 'female' },
+        ],
+        db: { map: 'sex' },
+        validation: { isRequired: true, },
+        ui: { displayMode: 'select' },
+      }),
       email: text({
         validation: { isRequired: true },
         isIndexed: 'unique',
@@ -19,6 +30,7 @@ export const user = list({
         ref: 'Drink.user', 
         many: true
     }),
-      contribution: contributionVf 
+      contribution: contributionVf,
+      bloodAlcohol: bloodAlcohol,
     }}
 );

@@ -4,12 +4,19 @@
 type User {
   id: ID!
   name: String
+  sex: UserSexType
   email: String
   password: PasswordState
   createdAt: DateTime
   drinks(where: DrinkWhereInput! = {}, orderBy: [DrinkOrderByInput!]! = [], take: Int, skip: Int! = 0): [Drink!]
   drinksCount(where: DrinkWhereInput! = {}): Int
   contribution: Int
+  bloodAlcohol: Float
+}
+
+enum UserSexType {
+  male
+  female
 }
 
 type PasswordState {
@@ -29,6 +36,7 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   id: IDFilter
   name: StringFilter
+  sex: UserSexTypeNullableFilter
   email: StringFilter
   createdAt: DateTimeNullableFilter
   drinks: DrinkManyRelationFilter
@@ -73,6 +81,13 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
+input UserSexTypeNullableFilter {
+  equals: UserSexType
+  in: [UserSexType!]
+  notIn: [UserSexType!]
+  not: UserSexTypeNullableFilter
+}
+
 input DateTimeNullableFilter {
   equals: DateTime
   in: [DateTime!]
@@ -93,6 +108,7 @@ input DrinkManyRelationFilter {
 input UserOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  sex: OrderDirection
   email: OrderDirection
   createdAt: OrderDirection
 }
@@ -104,6 +120,7 @@ enum OrderDirection {
 
 input UserUpdateInput {
   name: String
+  sex: UserSexType
   email: String
   password: String
   createdAt: DateTime
@@ -124,6 +141,7 @@ input UserUpdateArgs {
 
 input UserCreateInput {
   name: String
+  sex: UserSexType
   email: String
   password: String
   createdAt: DateTime
@@ -140,7 +158,7 @@ type Drink {
   size: Int
   type: DrinkTypeType
   createdAt: DateTime
-  alcoolPercentage: Int
+  alcoholPercentage: Int
   user: User
 }
 
@@ -163,7 +181,7 @@ input DrinkWhereInput {
   size: IntFilter
   type: DrinkTypeTypeNullableFilter
   createdAt: DateTimeNullableFilter
-  alcoolPercentage: IntFilter
+  alcoholPercentage: IntFilter
   user: UserWhereInput
 }
 
@@ -190,14 +208,14 @@ input DrinkOrderByInput {
   size: OrderDirection
   type: OrderDirection
   createdAt: OrderDirection
-  alcoolPercentage: OrderDirection
+  alcoholPercentage: OrderDirection
 }
 
 input DrinkUpdateInput {
   size: Int
   type: DrinkTypeType
   createdAt: DateTime
-  alcoolPercentage: Int
+  alcoholPercentage: Int
   user: UserRelateToOneForUpdateInput
 }
 
@@ -216,7 +234,7 @@ input DrinkCreateInput {
   size: Int
   type: DrinkTypeType
   createdAt: DateTime
-  alcoolPercentage: Int
+  alcoholPercentage: Int
   user: UserRelateToOneForCreateInput
 }
 
@@ -261,6 +279,7 @@ type UserAuthenticationWithPasswordFailure {
 
 input CreateInitialUserInput {
   name: String
+  sex: UserSexType
   email: String
   password: String
 }

@@ -15,6 +15,7 @@ generator client {
 model User {
   id        String    @id @default(cuid())
   name      String    @default("")
+  sex       String    @map("sex")
   email     String    @unique @default("")
   password  String
   createdAt DateTime? @default(now())
@@ -22,13 +23,13 @@ model User {
 }
 
 model Drink {
-  id               String    @id @default(cuid())
-  size             Int
-  type             String    @map("drink_type")
-  createdAt        DateTime? @default(now())
-  alcoolPercentage Int       @map("alcool_percentage")
-  user             User?     @relation("Drink_user", fields: [userId], references: [id])
-  userId           String?   @map("user")
+  id                String    @id @default(cuid())
+  size              Int
+  type              String    @map("drink_type")
+  createdAt         DateTime? @default(now())
+  alcoholPercentage Int       @map("alcool_percentage")
+  user              User?     @relation("Drink_user", fields: [userId], references: [id])
+  userId            String?   @map("user")
 
   @@index([userId])
 }

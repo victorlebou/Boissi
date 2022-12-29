@@ -1,7 +1,10 @@
+import { UserItem } from "../user/user-type";
+
 export type DrinkItem = {
     id: string;
     size: number;
     type: string;
     createdAt: Date;
-    alcoolPercentage: number;
+    alcoholPercentage: number;
+    user: UserItem;
 }

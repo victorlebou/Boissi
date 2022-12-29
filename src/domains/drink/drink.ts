@@ -24,7 +24,7 @@ export const drink = list({
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
-      alcoolPercentage: select({
+      alcoholPercentage: select({
         type: 'integer',
         options: [
           { label: '4%', value: 4 },
