@@ -10,7 +10,7 @@ type User {
   createdAt: DateTime
   drinks(where: DrinkWhereInput! = {}, orderBy: [DrinkOrderByInput!]! = [], take: Int, skip: Int! = 0): [Drink!]
   drinksCount(where: DrinkWhereInput! = {}): Int
-  contribution: Int
+  contribution: Float
   bloodAlcohol: Float
   bloodAlcoholHistory: Float
 }

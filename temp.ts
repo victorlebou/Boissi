@@ -1,0 +1,1 @@
+{"operationName":"createBeer","variables":{"userID":"clc87548h0044zkvdpj0vu781"},"query":"mutation createBeer($userID: ID!) {  createDrink(    data: {size: 355, alcoholPercentage: 5, type: beer, user: {connect: {id: $userID}}}  ) {    id  }}"}

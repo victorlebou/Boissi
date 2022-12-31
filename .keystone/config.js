@@ -76,7 +76,7 @@ var import_core2 = require("@keystone-6/core");
 var import_fields2 = require("@keystone-6/core/fields");
 var contributionVf = (0, import_fields2.virtual)({
   field: import_core2.graphql.field({
-    type: import_core2.graphql.Int,
+    type: import_core2.graphql.Float,
     async resolve(item, args, context) {
       const user2 = item;
       const userDrinks = await context.query.Drink.findMany({
@@ -84,7 +84,10 @@ var contributionVf = (0, import_fields2.virtual)({
       });
       const userDrinksCount = userDrinks.length;
       const totalDrinks = await context.query.Drink.count({});
-      return Math.round(userDrinksCount / totalDrinks * 100) / 100;
+      const result = parseFloat(
+        (userDrinksCount / totalDrinks * 100 / 100).toFixed(2)
+      );
+      return !result ? 0 : result;
     }
   })
 });
@@ -207,11 +210,17 @@ var session = (0, import_session.statelessSessions)({
 });
 
 // keystone.ts
+var cors = require("cors");
 var keystone_default = withAuth(
   (0, import_core5.config)({
     db: {
       provider: "sqlite",
       url: "file:./keystone.db"
+    },
+    server: {
+      extendExpressApp: (app) => {
+        app.use(cors());
+      }
     },
     lists,
     session
